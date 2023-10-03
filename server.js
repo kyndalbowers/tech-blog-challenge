@@ -29,6 +29,10 @@ app.use('/api/comments', commentRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/', pageRoutes);
 
+app.use((err, req, res, next) => {
+    // Handle errors, set appropriate status codes, and send error responses
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
