@@ -1,24 +1,35 @@
 const express = require('express');
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const userRoutes = require('./routes/userRoutes');
+const postRoutes = require('./routes/postRoutes');
+const commentRoutes = require('./routes/commentRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
+const pageRoutes = require('./routes/pageRoutes');
+
 const app = express();
-const postController = require('./controllers/postController');
-const PORT = process.env.PORT || 3001;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
-
-app.get('/', (req, res) => {
-    res.send('Welcome to my Tech Blog!');
+const sessionStore = new SequelizeStore({
+    db: sequelize,
 });
 
-app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()}: ${req.method} ${req.url}`);
-    next();
-});
+app.use(
+    session({
+        secret: 'secret-key',
+        resave: false,
+        saveUninitialized: false,
+        store: sessionStore,
+    })
+);
 
-app.use(express.static('public'));
+app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/comments', commentRoutes);
+app.use('/dashboard', dashboardRoutes);
+app.use('/', pageRoutes);
 
-app.post('/api/posts', postController.createPost);
-
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log('server is running on http://localhost:${PORT}');
+    console.log(`Server is running on port ${PORT}`);
 });
