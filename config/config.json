@@ -1,0 +1,20 @@
+{
+    "development": {
+        "username": "root",
+        "password": "Chickenfingers",
+        "database": "tech_blog",
+        "host": "localhost",
+        "dialect": "mysql"
+    },
+    "test": {
+        "username": "root",
+        "password": "Chickenfingers",
+        "database": "tech_blog",
+        "host": "localhost",
+        "dialect": "mysql"
+    },
+    "production": {
+        "use_env_variable": "DATABASE_URL",
+        "dialect": "mysql"
+    }
+}
