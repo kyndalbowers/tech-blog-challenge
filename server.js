@@ -30,7 +30,17 @@ app.use('/dashboard', dashboardRoutes);
 app.use('/', pageRoutes);
 
 app.use((err, req, res, next) => {
-    // Handle errors, set appropriate status codes, and send error responses
+    console.error(err);
+
+    let statusCode = 500;
+    let errorMessage = 'An unexpected error occurred.';
+
+    if (err instanceof CustomError) {
+        statusCode = err.statusCode;
+        errorMessage = err.message;
+    }
+
+    res.status(statusCode).json({ error: errorMessage });
 });
 
 const PORT = process.env.PORT || 3000;
