@@ -12,16 +12,16 @@ const app = express();
 
 const sessionStore = new SequelizeStore({
     db: sequelize,
-});
-
-app.use(
-    session({
-        secret: 'secret-key',
+    });
+    
+    app.use(
+        session({
+        secret: 'Changeme123',
         resave: false,
         saveUninitialized: false,
         store: sessionStore,
-    })
-);
+        })
+    );
 
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
