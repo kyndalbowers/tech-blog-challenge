@@ -1,0 +1,14 @@
+<h1>{{post.title}}</h1>
+<p>{{post.content}}</p>
+
+<h3>Comments</h3>
+<ul>
+    {{#each comments}}
+        <li>{{this.text}} ({{this.date}})</li>
+    {{/each}}
+</ul>
+
+<form action="/api/posts/{{post.id}}/comments" method="POST">
+    <textarea name="text" placeholder="Add a comment"></textarea>
+    <button type="submit">Submit</button>
+</form>

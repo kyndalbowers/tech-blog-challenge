@@ -1,0 +1,12 @@
+{{#if user}}
+    <p>Welcome, {{user.username}}!</p>
+{{else}}
+    <p>Welcome to our tech blog!</p>
+{{/if}}
+
+<h2>Latest Blog Posts</h2>
+<ul>
+    {{#each posts}}
+        <li><a href="/posts/{{id}}">{{title}}</a></li>
+    {{/each}}
+</ul>

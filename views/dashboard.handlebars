@@ -1,0 +1,13 @@
+<h2>Your Dashboard, {{user.username}}!</h2>
+
+<h3>Your Blog Posts</h3>
+<ul>
+    {{#each userPosts}}
+        <li>
+            <a href="/dashboard/edit/{{id}}">Edit</a>
+            <a href="/posts/{{id}}">{{title}}</a>
+        </li>
+    {{/each}}
+</ul>
+
+<a href="/dashboard/new">Create New Post</a>
